@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
 
 import { UnicorneditorComponent } from './unicorneditor.component';
 
@@ -8,6 +9,9 @@ describe('UnicorneditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports:[
+        StoreModule.forRoot({}),
+      ],
       declarations: [ UnicorneditorComponent ]
     })
     .compileComponents();

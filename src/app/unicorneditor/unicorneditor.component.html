@@ -1,0 +1,33 @@
+<p>unicorneditor works!</p>
+
+<div *ngIf="currentUnicorn !== undefined">
+{{currentUnicorn.name}}
+{{currentUnicorn.age}}
+{{currentUnicorn.gender}}
+<form>
+    <div>
+        <label for="name">name: </label>
+        <input name="name" id="name" [(ngModel)]="currentUnicorn.name" placeholder="name">
+    </div>
+    <div>
+        <label for="color">color: </label>
+        <input id="color" cpOutputFormat="hex" name="color"
+        [(colorPicker)]="currentUnicorn.color" 
+        [style.background]="currentUnicorn.color"
+        />{{currentUnicorn.color}}
+    </div>
+    <div>
+        <select (change)="onGenderChange($event)" [(ngModel)]="currentUnicorn.gender" name="gender">
+          <option *ngFor="let gender of availableGenders"
+              [value]="gender">{{gender}}</option>
+        </select>
+      </div>
+      <div>
+        <label for="age">age: </label>
+        <input name="age" id="age" [(ngModel)]="currentUnicorn.age">
+    </div>
+</form>
+
+<button id="save" (click)="onSave()">Save my Unicorn </button>
+</div>
+

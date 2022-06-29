@@ -23,13 +23,13 @@ describe('AppComponent', () => {
   it(`should have as title 'unicorsrules'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('unicorsrules');
+    expect(app.title).toEqual('UnicornsRules');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('unicorsrules app is running!');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Unicorns Rules !');
   });
 });

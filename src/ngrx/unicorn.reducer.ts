@@ -1,6 +1,6 @@
 import { createReducer, on, createSelector, createFeatureSelector } from '@ngrx/store';
 import { Unicorn } from 'src/app/model/Unicorn';
-import { create } from './unicorn.actions';
+import { create,createUnicornSuccess } from './unicorn.actions';
 
 
 const initialUnicornsList: Unicorn[] = [];
@@ -19,7 +19,9 @@ export const selectUnicornsList = createSelector(feature, (state): Unicorn[] => 
 
 export const unicornReducer = createReducer(
   initialState,
-  on(create, (state, { unicorn}) => {
+  on(createUnicornSuccess, (state, { unicorn}) => {
+    console.log("calling reducer on sucess");
+    console.log(unicorn);
     const newArray = state.unicornsList.slice(0);
     return {
       unicornsList: [...state.unicornsList, unicorn],

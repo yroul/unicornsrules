@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { Unicorn } from '../model/Unicorn';
 import { Gender } from '../model/Gender';
 import { Store } from '@ngrx/store';
@@ -22,8 +22,15 @@ export class UnicornService {
     console.log('fetching unicorns...');
     return this.unicorns2$;
   }
-  saveUnicorn(unicorn: Unicorn)
+  saveUnicorn(unicorn: Unicorn):Observable<any>
   {
-    this.store.dispatch(create({unicorn:unicorn}))
+    console.log("save unicorn called")
+    //TODO save unicorn
+    return of(unicorn);
+  }
+  saveUnicorn2(): Observable<any>
+  {
+    console.log("fake saveUnicorn");
+    return of(EMPTY);
   }
 }

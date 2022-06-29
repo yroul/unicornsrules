@@ -8,6 +8,8 @@ import { UnicorneditorComponent } from './unicorneditor/unicorneditor.component'
 import { UnicornlistComponent } from './unicornlist/unicornlist.component';
 import { StoreModule } from '@ngrx/store';
 import { unicornReducer } from '../ngrx/unicorn.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { UnicornEffects } from 'src/ngrx/unicorns.effects';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { unicornReducer } from '../ngrx/unicorn.reducer';
     StoreModule.forRoot({
       unicorns: unicornReducer
     }, {}),
-    ColorPickerModule
+    EffectsModule.forRoot([UnicornEffects]),
+    ColorPickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

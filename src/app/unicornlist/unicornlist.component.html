@@ -1,6 +1,4 @@
-<p>unicornlist works!</p>
-
-<table>
+<table *ngIf="list && list.length > 0">
     <tr *ngFor="let item of list">
         <td>name: {{item.name}}</td>
         <td>age: {{item.age}}</td>
@@ -8,3 +6,6 @@
         <td>gender: {{item.gender}}</td>
     </tr>
 </table>
+<div *ngIf="!list || list.length === 0">
+    Sadness ! No unicorns to rules the Earth....
+</div>

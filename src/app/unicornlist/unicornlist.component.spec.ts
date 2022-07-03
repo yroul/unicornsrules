@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Actions } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { UnicornlistComponent } from './unicornlist.component';
@@ -12,6 +13,7 @@ describe('UnicornlistComponent', () => {
       imports:[
         StoreModule.forRoot({}),
       ],
+      providers:[Actions],
       declarations: [ UnicornlistComponent ]
     })
     .compileComponents();

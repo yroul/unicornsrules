@@ -10,12 +10,14 @@ import { StoreModule } from '@ngrx/store';
 import { unicornReducer } from '../ngrx/unicorn.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { UnicornEffects } from 'src/ngrx/unicorns.effects';
+import { BabyfactoryComponent } from './babyfactory/babyfactory.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UnicorneditorComponent,
-    UnicornlistComponent
+    UnicornlistComponent,
+    BabyfactoryComponent
   ],
   imports: [
     BrowserModule,

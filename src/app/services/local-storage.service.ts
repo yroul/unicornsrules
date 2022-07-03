@@ -8,12 +8,10 @@ const STORAGE_PREFIX = "uniorns";
 })
 export class LocalStorageService {
 
-  
+
   constructor() {}
   setItem(key: any, value: any): Observable<any>{
     try{
-      console.log("we are ready to write this data on local storage (key="+key+") :");
-      console.log(value);
       window.localStorage.setItem(STORAGE_PREFIX+"-"+key,JSON.stringify(value));
       return of(true);
     } catch(e){

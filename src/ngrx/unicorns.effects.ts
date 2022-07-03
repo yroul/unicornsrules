@@ -7,30 +7,32 @@ import { CREATE_UNICORN_ACTION,FETCH_UNICORN_ACTION } from './unicorn.actions';
 import { createUnicornSuccess,fetchUnicornSuccess } from './unicorn.actions';
 @Injectable()
 export class UnicornEffects {
- 
-  createUnicorn$ = createEffect(() => 
+
+  createUnicorn$ = createEffect(() =>
     () => this.actions$.pipe(
       ofType(CREATE_UNICORN_ACTION),
-      exhaustMap((createdUnicorn) => 
+      exhaustMap((createdUnicorn) =>
           this.unicornService.saveUnicorn(createdUnicorn).pipe(
               map((ackUnicorn) => createUnicornSuccess(ackUnicorn)),
               catchError((err)=> {throw new Error(err);})
       ))
   ));
-  fetchUnicorn$ = createEffect(() => 
+  fetchUnicorn$ = createEffect(() =>
     () => this.actions$.pipe(
       ofType(FETCH_UNICORN_ACTION),
-      exhaustMap(() => 
+      exhaustMap(() =>
         this.unicornService.fetchUnicorns().pipe(
-          map((d) => {
-            console.log("im here",d);
-            return fetchUnicornSuccess({unicorns: d})
-          }),          
-          catchError((err)=> {throw new Error(err);})
+          map((d) => fetchUnicornSuccess({unicorns: d})),
+          catchError((err:Error)=> {
+            if(err.message.includes("no item found for key")){
+              this.unicornService.initializeLocalStorage().subscribe();
+            }
+            throw err;
+          })
         )
       )
   ));
- 
+
   constructor(
     private actions$: Actions,
     private unicornService: UnicornService

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UnicorneditorComponent } from './unicorneditor/unicorneditor.component';
 import { UnicornlistComponent } from './unicornlist/unicornlist.component';
+import {BabyfactoryComponent} from "./babyfactory/babyfactory.component";
 
 const routes: Routes = [
   {
@@ -9,6 +10,9 @@ const routes: Routes = [
   },
   {
     path: 'edit', component: UnicorneditorComponent
+  },
+  {
+    path: 'babyfactory', component: BabyfactoryComponent
   }
 ];
 

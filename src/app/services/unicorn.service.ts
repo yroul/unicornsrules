@@ -21,7 +21,7 @@ export class UnicornService {
     this.unicorns$ = store.select('unicorns');
     this.unicorns2$ = store.select(selectUnicornsList);
    }
-  fetchUnicorns():Observable<Unicorn[]> 
+  fetchUnicorns():Observable<Unicorn[]>
   {
     console.log('fetching unicorns...');
     return this.localStorage.getItem(UNICORN_LIST).pipe(
@@ -31,8 +31,7 @@ export class UnicornService {
   saveUnicorn(unicorn: Unicorn):Observable<any>
   {
     console.log("save unicorn called")
-    const list = this.localStorage.getItem(UNICORN_LIST).pipe(map((data) => {
-        console.log(data);
+    this.localStorage.getItem(UNICORN_LIST).pipe(map((data) => {
         let toSave;
         if(data){
           console.log("unicorn list already exist", data)
@@ -42,10 +41,11 @@ export class UnicornService {
         }
         toSave.push(unicorn);
         return this.localStorage.setItem(UNICORN_LIST,toSave);
-      } )).subscribe((data) => {
-        console.log(data);
-      });
+      } )).subscribe();
 
     return of(unicorn);
+  }
+  initializeLocalStorage(): Observable<any> {
+    return this.localStorage.setItem(UNICORN_LIST, []);
   }
 }

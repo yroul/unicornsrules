@@ -3,7 +3,12 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, EmptyError, of, pipe, tap } from 'rxjs';
 import { map, mergeMap, catchError, exhaustMap } from 'rxjs/operators';
 import { UnicornService } from 'src/app/services/unicorn.service';
-import { CREATE_UNICORN_ACTION,FETCH_UNICORN_ACTION } from './unicorn.actions';
+import {
+  CLEAR_DATABASE_ACTION,
+  clearDatabaseSuccess,
+  CREATE_UNICORN_ACTION,
+  FETCH_UNICORN_ACTION
+} from './unicorn.actions';
 import { createUnicornSuccess,fetchUnicornSuccess } from './unicorn.actions';
 @Injectable()
 export class UnicornEffects {
@@ -24,14 +29,23 @@ export class UnicornEffects {
         this.unicornService.fetchUnicorns().pipe(
           map((d) => fetchUnicornSuccess({unicorns: d})),
           catchError((err:Error)=> {
-            if(err.message.includes("no item found for key")){
+           /* if(err.message.includes("no item found for key")){
               this.unicornService.initializeLocalStorage().subscribe();
-            }
+            }*/
             throw err;
           })
         )
       )
   ));
+  clearDatabase$ = createEffect(() =>
+    () => this.actions$.pipe(
+      ofType(CLEAR_DATABASE_ACTION),
+      exhaustMap(() => {
+        return this.unicornService.clearDatabase().pipe(
+          map(() => clearDatabaseSuccess())
+        )
+      })
+    ));
 
   constructor(
     private actions$: Actions,

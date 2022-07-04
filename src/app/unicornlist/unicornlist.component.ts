@@ -26,7 +26,10 @@ export class UnicornlistComponent implements OnInit {
      // takeUntil(this.destroyed$)
    )
    .subscribe((data) => {
-   this.list = data.unicorns.map((d:any) => d.unicorn);
+     if(data) {
+       console.log(data)
+       this.list = data.unicorns.map((d: any) => d.unicorn);
+     }
    });
   }
 

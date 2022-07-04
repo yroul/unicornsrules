@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {map, Observable, of} from 'rxjs';
+import {EMPTY, map, Observable, of} from 'rxjs';
 import {Unicorn} from '../model/Unicorn';
 import {Gender} from '../model/Gender';
 import {Store} from '@ngrx/store';
 import {selectUnicornsList} from 'src/ngrx/unicorn.reducer';
 import {LocalStorageService} from './local-storage.service';
+import {catchError} from "rxjs/operators";
 
 const UNICORN_LIST = "unicornList";
 @Injectable({
@@ -24,7 +25,11 @@ export class UnicornService {
   {
     console.log('fetching unicorns...');
     return this.localStorage.getItem(UNICORN_LIST).pipe(
-      map((d) => d)
+      map((d) => d),
+      catchError(() => {
+       this.initializeLocalStorage().subscribe();
+       return of([]);
+      })
     )
   }
   saveUnicorn(unicorn: Unicorn):Observable<any>
@@ -45,6 +50,7 @@ export class UnicornService {
     return of(unicorn);
   }
   initializeLocalStorage(): Observable<any> {
+    console.log("Initialize database");
     return this.localStorage.setItem(UNICORN_LIST, []);
   }
 
@@ -77,4 +83,11 @@ export class UnicornService {
   private random(min:number, max:number){
     return Math.floor(Math.random() * (max - min) + min);
   };
+
+  clearDatabase():Observable<any> {
+    console.log("clear database");
+    return this.localStorage.clear().pipe(
+      map(() => this.initializeLocalStorage())
+    )
+  }
 }

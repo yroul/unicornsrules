@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { EMPTY, map, Observable, of, pipe, tap } from 'rxjs';
-import { Unicorn } from '../model/Unicorn';
-import { Gender } from '../model/Gender';
-import { Store } from '@ngrx/store';
-import { create } from 'src/ngrx/unicorn.actions';
-import { UnicornStateInterface, selectUnicornsList } from 'src/ngrx/unicorn.reducer';
-import { LocalStorageService } from './local-storage.service';
+import {Injectable} from '@angular/core';
+import {map, Observable, of} from 'rxjs';
+import {Unicorn} from '../model/Unicorn';
+import {Gender} from '../model/Gender';
+import {Store} from '@ngrx/store';
+import {selectUnicornsList} from 'src/ngrx/unicorn.reducer';
+import {LocalStorageService} from './local-storage.service';
 
 const UNICORN_LIST = "unicornList";
 @Injectable({
@@ -48,4 +47,34 @@ export class UnicornService {
   initializeLocalStorage(): Observable<any> {
     return this.localStorage.setItem(UNICORN_LIST, []);
   }
+
+  makeBaby(firstUnicorn: Unicorn, secondUnicorn: Unicorn):Unicorn {
+    if(firstUnicorn.gender === secondUnicorn.gender){
+      throw new Error("Unicorns with same Gender can't have baby");
+    }
+    if(firstUnicorn.gender === Gender.Other || secondUnicorn.gender === Gender.Other){
+      throw new Error("Unicorns can't have baby if one of them has 'Other' gender");
+    }
+    const baby = new Unicorn();
+    baby.name = firstUnicorn.name + "-" + secondUnicorn.name;
+    baby.color = `#${firstUnicorn.color.substring(1, 4) + secondUnicorn.color.substring(4, 7)}`;
+    baby.gender = this.getRandomGender();
+    return baby;
+  }
+  private getRandomGender(): Gender{
+    const rand =  this.random(0,3);
+    switch (rand){
+      case 0:
+        return Gender.Other;
+      case 1:
+        return Gender.Female;
+      case 2:
+        return Gender.Male;
+      default:
+        throw new Error("Error getting random gender");
+    }
+  }
+  private random(min:number, max:number){
+    return Math.floor(Math.random() * (max - min) + min);
+  };
 }

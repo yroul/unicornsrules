@@ -2,9 +2,16 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Unicorn} from "../model/Unicorn";
 import {Store} from "@ngrx/store";
 import {Actions, ofType} from "@ngrx/effects";
-import {FETCH_UNICORN_SUCCESS_ACTION, fetchUnicorn} from "../../ngrx/unicorn.actions";
-import {map} from "rxjs";
+import {
+  create,
+  CREATE_UNICORN_SUCESS_ACTION,
+  FETCH_UNICORN_SUCCESS_ACTION,
+  fetchUnicorn
+} from "../../ngrx/unicorn.actions";
+import {map, takeUntil} from "rxjs";
 import {Gender} from "../model/Gender";
+import {UnicornService} from "../services/unicorn.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-babyfactory',
@@ -20,7 +27,9 @@ export class BabyfactoryComponent implements OnInit, OnChanges {
   availableUnicorns2: Unicorn[] = [];
   constructor(
     private store: Store<{unicorns: Unicorn[]}>,
-    private updates$: Actions
+    private updates$: Actions,
+    private unicornService:UnicornService,
+    private router: Router
   ) {
     updates$.pipe(
       ofType(FETCH_UNICORN_SUCCESS_ACTION),
@@ -30,6 +39,13 @@ export class BabyfactoryComponent implements OnInit, OnChanges {
       .subscribe((data) => {
         this.allUnicorns = data.unicorns.map((d:any) => d.unicorn).filter((u: Unicorn) => u.gender !== Gender.Other);
         this.availableUnicorns1 = this.allUnicorns;
+      });
+    updates$.pipe(
+      ofType(CREATE_UNICORN_SUCESS_ACTION),
+      //takeUntil(this.destroyed$)
+    )
+      .subscribe(() => {
+        this.router.navigate(['/']);
       });
   }
 
@@ -48,5 +64,14 @@ export class BabyfactoryComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
+  }
+
+  makeBaby() {
+
+    if(this.firstUnicorn && this.secondUnicorn) {
+      const baby = this.unicornService.makeBaby(this.firstUnicorn,this.secondUnicorn);
+      this.store.dispatch(create({unicorn:baby}))
+    }
+
   }
 }

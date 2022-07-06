@@ -37,7 +37,7 @@ export class BabyfactoryComponent implements OnInit, OnChanges {
       // takeUntil(this.destroyed$)
     )
       .subscribe((data) => {
-        this.allUnicorns = data.unicorns.map((d:any) => d.unicorn).filter((u: Unicorn) => u.gender !== Gender.Other);
+        this.allUnicorns = data.unicorns.map((d:any) => d.unicorn).filter((u: Unicorn) => u.getGender() !== Gender.Other);
         this.availableUnicorns1 = this.allUnicorns;
       });
     updates$.pipe(
@@ -57,8 +57,8 @@ export class BabyfactoryComponent implements OnInit, OnChanges {
   {
     if(this.firstUnicorn && unicornIndex === 1){
       this.availableUnicorns2 = this.allUnicorns
-        .filter((u) => u.name !== this.firstUnicorn?.name)
-        .filter((u:Unicorn) => u.gender !== this.firstUnicorn?.gender);
+        .filter((u) => u.getName() !== this.firstUnicorn?.getName())
+        .filter((u:Unicorn) => u.getGender() !== this.firstUnicorn?.getGender());
     }
   }
 

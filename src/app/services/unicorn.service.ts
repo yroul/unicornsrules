@@ -6,6 +6,7 @@ import {Store} from '@ngrx/store';
 import {selectUnicornsList} from 'src/ngrx/unicorn.reducer';
 import {LocalStorageService} from './local-storage.service';
 import {catchError} from "rxjs/operators";
+import { random } from '../utils/math';
 
 const UNICORN_LIST = "unicornList";
 @Injectable({
@@ -34,7 +35,7 @@ export class UnicornService {
   }
   saveUnicorn(unicorn: Unicorn):Observable<any>
   {
-    console.log("save unicorn called")
+    console.log("save unicorn called", unicorn)
     this.localStorage.getItem(UNICORN_LIST).pipe(map((data) => {
         let toSave;
         if(data){
@@ -68,7 +69,7 @@ export class UnicornService {
     return baby;
   }
   private getRandomGender(): Gender{
-    const rand =  this.random(0,3);
+    const rand =  random(0,3);
     switch (rand){
       case 0:
         return Gender.Other;
@@ -80,9 +81,6 @@ export class UnicornService {
         throw new Error("Error getting random gender");
     }
   }
-  private random(min:number, max:number){
-    return Math.floor(Math.random() * (max - min) + min);
-  };
 
   clearDatabase():Observable<any> {
     console.log("clear database");

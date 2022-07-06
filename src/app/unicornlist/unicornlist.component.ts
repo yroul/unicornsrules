@@ -27,8 +27,7 @@ export class UnicornlistComponent implements OnInit {
    )
    .subscribe((data) => {
      if(data) {
-       console.log(data)
-       this.list = data.unicorns.map((d: any) => d.unicorn);
+       this.list = data.unicorns;
      }
    });
   }

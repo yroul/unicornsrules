@@ -16,8 +16,8 @@ export class UnicornEffects {
   createUnicorn$ = createEffect(() =>
     () => this.actions$.pipe(
       ofType(CREATE_UNICORN_ACTION),
-      exhaustMap((createdUnicorn) =>
-          this.unicornService.saveUnicorn(createdUnicorn).pipe(
+      exhaustMap(({unicorn}) =>
+          this.unicornService.saveUnicorn(unicorn).pipe(
               map((ackUnicorn) => createUnicornSuccess(ackUnicorn)),
               catchError((err)=> {throw new Error(err);})
       ))
@@ -27,7 +27,10 @@ export class UnicornEffects {
       ofType(FETCH_UNICORN_ACTION),
       exhaustMap(() =>
         this.unicornService.fetchUnicorns().pipe(
-          map((d) => fetchUnicornSuccess({unicorns: d})),
+          map((d) => {
+            console.log(d);
+            return fetchUnicornSuccess({unicorns: d});
+          }),
           catchError((err:Error)=> {
            /* if(err.message.includes("no item found for key")){
               this.unicornService.initializeLocalStorage().subscribe();

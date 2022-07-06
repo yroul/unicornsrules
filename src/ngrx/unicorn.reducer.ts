@@ -30,7 +30,6 @@ export const unicornReducer = createReducer(
     };
   }),
   on(fetchUnicornSuccess, (state,{unicorns}) => {
-    console.log("/// ", unicorns);
     return {
       unicornsList: unicorns,
     }

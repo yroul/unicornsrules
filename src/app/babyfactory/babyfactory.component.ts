@@ -36,8 +36,9 @@ export class BabyfactoryComponent implements OnInit, OnChanges {
       map((action:any) => action)
       // takeUntil(this.destroyed$)
     )
-      .subscribe((data) => {
-        this.allUnicorns = data.unicorns.map((d:any) => d.unicorn).filter((u: Unicorn) => u.gender !== Gender.Other);
+      .subscribe(({unicorns}) => {
+        console.log(unicorns)
+        this.allUnicorns = unicorns.filter((u: Unicorn) => u.gender !== Gender.Other);
         this.availableUnicorns1 = this.allUnicorns;
       });
     updates$.pipe(

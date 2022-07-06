@@ -22,34 +22,34 @@ describe('UnicornService', () => {
   });
   it('should create a baby', () => {
     const unicorn1= new Unicorn();
-    unicorn1.setName("Jean");
-    unicorn1.setGender(Gender.Male);
-    unicorn1.setColor("#012345");
-    unicorn1.setAge(20);
+    unicorn1.name = "Jean";
+    unicorn1.gender = Gender.Male;
+    unicorn1.color = "#012345"
+    unicorn1.age = 20;
     const unicorn2= new Unicorn();
-    unicorn2.setName("Clarisse");
-    unicorn2.setGender(Gender.Female);
-    unicorn2.setColor("#6789FF")
-    unicorn2.setAge(20);
+    unicorn2.name = "Clarisse";
+    unicorn2.gender = Gender.Female;
+    unicorn2.color = "#6789FF"
+    unicorn2.age = 20;
 
     const baby = service.makeBaby(unicorn1,unicorn2);
-    expect(baby.getName()).toEqual("Jean-Clarisse");
-    expect(baby.getColor()).toEqual("#0129FF");
-    expect(baby.getAge()).toEqual(0);
-    expect(baby.getGender()).toBeTruthy();
+    expect(baby.name).toEqual("Jean-Clarisse");
+    expect(baby.color).toEqual("#0129FF");
+    expect(baby.age).toEqual(0);
+    expect(baby.gender).toBeTruthy();
 
   });
   it('should failed making a baby (Same gender unicorns)', () => {
     const unicorn1= new Unicorn();
-    unicorn1.setName("Jean");
-    unicorn1.setGender(Gender.Male);
-    unicorn1.setColor("#012345");
-    unicorn1.setAge(20);
+    unicorn1.name = "Jean";
+    unicorn1.gender = Gender.Male;
+    unicorn1.color = "#012345"
+    unicorn1.age = 20;
     const unicorn2= new Unicorn();
-    unicorn2.setName("Raymond");
-    unicorn2.setGender(Gender.Male);
-    unicorn2.setColor("#6789FF")
-    unicorn2.setAge(20);
+    unicorn2.name = "Raymond";
+    unicorn2.gender = Gender.Male;
+    unicorn2.color = "#6789FF"
+    unicorn2.age = 20;
 
 
     expect(() => service.makeBaby(unicorn1,unicorn2))
@@ -58,15 +58,15 @@ describe('UnicornService', () => {
   });
   it('should failed making a baby (One of the unicorn has gender "Other")', () => {
     const unicorn1= new Unicorn();
-    unicorn1.setName("Jean");
-    unicorn1.setGender(Gender.Male);
-    unicorn1.setColor("#012345");
-    unicorn1.setAge(20);
+    unicorn1.name = "Jean";
+    unicorn1.gender = Gender.Male;
+    unicorn1.color = "#012345"
+    unicorn1.age = 20;
     const unicorn2= new Unicorn();
-    unicorn2.setName("Raymond");
-    unicorn2.setGender(Gender.Other);
-    unicorn2.setColor("#6789FF")
-    unicorn2.setAge(20);
+    unicorn2.name = "Raymond";
+    unicorn2.gender = Gender.Other;
+    unicorn2.color = "#6789FF"
+    unicorn2.age = 20;
 
 
     expect(() => service.makeBaby(unicorn1,unicorn2))

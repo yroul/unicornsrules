@@ -55,16 +55,16 @@ export class UnicornService {
   }
 
   makeBaby(firstUnicorn: Unicorn, secondUnicorn: Unicorn):Unicorn {
-    if(firstUnicorn.getGender() === secondUnicorn.getGender()){
+    if(firstUnicorn.gender === secondUnicorn.gender){
       throw new Error("Unicorns with same Gender can't have baby");
     }
-    if(firstUnicorn.getGender() === Gender.Other || secondUnicorn.getGender() === Gender.Other){
+    if(firstUnicorn.gender === Gender.Other || secondUnicorn.gender === Gender.Other){
       throw new Error("Unicorns can't have baby if one of them has 'Other' gender");
     }
     const baby = new Unicorn();
-    baby.setName(firstUnicorn.getName() + "-" + secondUnicorn.getName());
-    baby.setColor(`#${firstUnicorn.getColor().substring(1, 4) + secondUnicorn.getColor().substring(4, 7)}`);
-    baby.setGender(this.getRandomGender());
+    baby.name = firstUnicorn.name + "-" + secondUnicorn.name;
+    baby.color = `#${firstUnicorn.color.substring(1, 4) + secondUnicorn.color.substring(4, 7)}`;
+    baby.gender = this.getRandomGender();
     return baby;
   }
   private getRandomGender(): Gender{

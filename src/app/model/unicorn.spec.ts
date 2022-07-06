@@ -13,8 +13,7 @@ describe('UnicornService', () => {
   it('should be created', () => {
     let unicorn = new Unicorn("Jean","#FF0050",Gender.Other,26);
     expect(unicorn).toBeTruthy();
-    expect(unicorn.getName()).toEqual("Jean");
-    expect(unicorn.getAge()).toEqual(26);
-    expect(unicorn.getColor()).toEqual("#FF0050");
+    expect(unicorn.name).toEqual("Jean");
+    expect(unicorn.age).toEqual(26);
   });
 });

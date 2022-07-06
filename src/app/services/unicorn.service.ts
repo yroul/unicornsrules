@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
+import {Injectable, SkipSelf} from '@angular/core';
 import {EMPTY, map, Observable, of} from 'rxjs';
-import {Unicorn} from '../model/Unicorn';
+import {SKILLS_LIST, Unicorn} from '../model/Unicorn';
 import {Gender} from '../model/Gender';
 import {Store} from '@ngrx/store';
 import {selectUnicornsList} from 'src/ngrx/unicorn.reducer';
@@ -66,6 +66,22 @@ export class UnicornService {
     baby.name = firstUnicorn.name + "-" + secondUnicorn.name;
     baby.color = `#${firstUnicorn.color.substring(1, 4) + secondUnicorn.color.substring(4, 7)}`;
     baby.gender = this.getRandomGender();
+
+    const firstUnicornEntries = Object.entries(firstUnicorn);
+    const secondUnicornEntries = Object.entries(secondUnicorn);
+    for(let i=0;i<SKILLS_LIST.length; i++)
+    {
+        const skillName: string = SKILLS_LIST[i];
+        const firstUnicornSKillPoint = firstUnicornEntries.filter((entry) => entry[0] === skillName)[0][1];
+        const secondUnicornSKillPoint = secondUnicornEntries.filter((entry) => entry[0] === skillName)[0][1];
+        const skillValue = Math.round((firstUnicornSKillPoint + secondUnicornSKillPoint) / 2);
+        
+        Object.assign(baby, {
+          [skillName]: skillValue
+        })
+        
+    }
+
     return baby;
   }
   private getRandomGender(): Gender{

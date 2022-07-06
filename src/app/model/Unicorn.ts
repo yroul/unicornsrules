@@ -3,6 +3,14 @@ import { Gender } from "./Gender";
 import { random } from "../utils/math";
 
 export const MAX_SKILLS_POINT = 38;
+export const MAX_VALUE_PER_SKILL = 10;
+export const SKILLS_LIST= [
+    "agility", 
+    "kindness",
+    "strength",
+    "speed",
+    "intelligence"
+];
 export class Unicorn extends Animal{
     kindness:number = 0;
     strength:number = 0;
@@ -41,15 +49,6 @@ export class Unicorn extends Animal{
         this.color = color;
      };
     private randomizeSkills() {
-        
-        const MAX_VALUE_PER_SKILL = 10;
-        const SKILLS_LIST= [
-            "agility", 
-            "kindness",
-            "strength",
-            "speed",
-            "intelligence"
-        ];
 
         let leftSkillPoints = MAX_SKILLS_POINT;
         for(let i=0;i<SKILLS_LIST.length; i++)
@@ -62,7 +61,6 @@ export class Unicorn extends Animal{
                 if(leftSkillPoints - randomValue > 0){                    
                     pointToAssign = randomValue;                
                 }else{
-                    console.log("assigning our last points")
                     pointToAssign = leftSkillPoints;
                 }
             }

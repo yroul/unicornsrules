@@ -10,13 +10,10 @@ describe('UnicornlistComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[
-        StoreModule.forRoot({}),
-      ],
-      providers:[Actions],
-      declarations: [ UnicornlistComponent ]
-    })
-    .compileComponents();
+      imports: [StoreModule.forRoot({})],
+      providers: [Actions],
+      declarations: [UnicornlistComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UnicornlistComponent);
     component = fixture.componentInstance;

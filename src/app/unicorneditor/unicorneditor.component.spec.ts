@@ -11,14 +11,10 @@ describe('UnicorneditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[
-        StoreModule.forRoot({}),
-        RouterTestingModule
-      ],
-      providers:[Actions],
-      declarations: [ UnicorneditorComponent ]
-    })
-    .compileComponents();
+      imports: [StoreModule.forRoot({}), RouterTestingModule],
+      providers: [Actions],
+      declarations: [UnicorneditorComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UnicorneditorComponent);
     component = fixture.componentInstance;

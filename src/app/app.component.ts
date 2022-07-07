@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Actions } from '@ngrx/effects';
 import { UnicornService } from './services/unicorn.service';
 import { Unicorn } from './model/Unicorn';
 import { clearDatabase } from '../ngrx/unicorn.actions';
@@ -14,12 +13,9 @@ export class AppComponent {
   title = 'UnicornsRules';
 
   constructor(
-    private unicornService:UnicornService,
-    private store: Store<{unicorns: Unicorn[]}>,
-    private updates$: Actions,
-  ) {
-
-  }
+    private unicornService: UnicornService,
+    private store: Store<{ unicorns: Unicorn[] }>
+  ) {}
 
   clearDatabase() {
     this.store.dispatch(clearDatabase());

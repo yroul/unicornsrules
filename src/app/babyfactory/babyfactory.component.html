@@ -2,20 +2,32 @@
 <ul>
   <li>Ony Male and Female can make a baby</li>
 </ul>
-<div >
+<div>
   <form>
     <div>
       <label for="firstUnicon">Unicorn 1</label>
-      <select (change)="onUnicornSelected($event,1)" [(ngModel)]="firstUnicorn" name="firstUnicon" id="firstUnicon">
-        <option *ngFor="let unicorn of availableUnicorns1"
-                [ngValue]="unicorn">{{unicorn.name}}</option>
+      <select
+        (change)="onUnicornSelected($event, 1)"
+        [(ngModel)]="firstUnicorn"
+        name="firstUnicon"
+        id="firstUnicon"
+      >
+        <option *ngFor="let unicorn of availableUnicorns1" [ngValue]="unicorn">
+          {{ unicorn.name }}
+        </option>
       </select>
     </div>
     <div *ngIf="firstUnicorn">
       <label for="secondUnicorn">Unicorn 2</label>
-      <select (change)="onUnicornSelected($event,2)" [(ngModel)]="secondUnicorn" name="secondUnicorn" id="secondUnicorn">
-        <option *ngFor="let unicorn of availableUnicorns2"
-                [ngValue]="unicorn">{{unicorn.name}}</option>
+      <select
+        (change)="onUnicornSelected($event, 2)"
+        [(ngModel)]="secondUnicorn"
+        name="secondUnicorn"
+        id="secondUnicorn"
+      >
+        <option *ngFor="let unicorn of availableUnicorns2" [ngValue]="unicorn">
+          {{ unicorn.name }}
+        </option>
       </select>
     </div>
 

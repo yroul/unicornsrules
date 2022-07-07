@@ -6,13 +6,16 @@ import { BabyfactoryComponent } from './babyfactory/babyfactory.component';
 
 const routes: Routes = [
   {
-    path: '', component: UnicornlistComponent,
+    path: '',
+    component: UnicornlistComponent,
   },
   {
-    path: 'edit', component: UnicorneditorComponent,
+    path: 'edit',
+    component: UnicorneditorComponent,
   },
   {
-    path: 'babyfactory', component: BabyfactoryComponent,
+    path: 'babyfactory',
+    component: BabyfactoryComponent,
   },
 ];
 
@@ -20,4 +23,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

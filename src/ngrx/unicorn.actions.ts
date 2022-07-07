@@ -9,22 +9,16 @@ export const CLEAR_DATABASE_ACTION = 'Clear Database';
 export const CLEAR_DATABASE_SUCCESS_ACTION = 'Clear Database SUCCESS';
 export const create = createAction(
   CREATE_UNICORN_ACTION,
-  props<{ unicorn: Unicorn}>(),
+  props<{ unicorn: Unicorn }>()
 );
 export const createUnicornSuccess = createAction(
   CREATE_UNICORN_SUCESS_ACTION,
-  props<{ unicorn: Unicorn}>(),
+  props<{ unicorn: Unicorn }>()
 );
-export const fetchUnicorn = createAction(
-  FETCH_UNICORN_ACTION,
-);
+export const fetchUnicorn = createAction(FETCH_UNICORN_ACTION);
 export const fetchUnicornSuccess = createAction(
   FETCH_UNICORN_SUCCESS_ACTION,
-  props<{ unicorns: Unicorn[]}>(),
+  props<{ unicorns: Unicorn[] }>()
 );
-export const clearDatabase = createAction(
-  CLEAR_DATABASE_ACTION,
-);
-export const clearDatabaseSuccess = createAction(
-  CLEAR_DATABASE_SUCCESS_ACTION,
-);
+export const clearDatabase = createAction(CLEAR_DATABASE_ACTION);
+export const clearDatabaseSuccess = createAction(CLEAR_DATABASE_SUCCESS_ACTION);

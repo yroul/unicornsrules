@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, take, throwError } from 'rxjs';
 
 const STORAGE_PREFIX = 'uniorns';
 @Injectable({
@@ -22,7 +22,7 @@ export class LocalStorageService {
     try {
       const rawRes = window.localStorage.getItem(STORAGE_PREFIX + '-' + key);
       if (rawRes) {
-        return of(JSON.parse(rawRes));
+        return of(JSON.parse(rawRes)).pipe(take(1));
       }
       return throwError(() => new Error('no item found for key ' + key));
     } catch (e) {

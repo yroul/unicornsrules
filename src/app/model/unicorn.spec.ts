@@ -40,4 +40,16 @@ describe('Unicorn', () => {
     expect(unicorn).toBeTruthy();
     expect(unicorn.color).toBeTruthy();
   });
+  it('should be get the correct skill value', () => {
+    let unicorn = new Unicorn();
+    unicorn.agility = 9;
+    expect(unicorn.getSkillValue('agility')).toEqual(9);
+  });
+  it('should be throw an Error (unknown skillName)', () => {
+    let unicorn = new Unicorn();
+    unicorn.agility = 9;
+    expect(() => {
+      unicorn.getSkillValue('unknown');
+    }).toThrowError();
+  });
 });

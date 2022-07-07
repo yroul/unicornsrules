@@ -67,4 +67,17 @@ export class Unicorn extends Animal {
       leftSkillPoints -= pointToAssign;
     }
   }
+  getSkillValue(str: string) {
+    const properties = Object.entries(this);
+    const skill = properties.filter(
+        (entry) => entry[0] === str
+      )
+      if(!skill){
+        throw new Error('Unknown skill "'+str+'"');
+      }
+      const skillPoint = skill[0][1];
+      return skillPoint;
+    
+
+  }
 }

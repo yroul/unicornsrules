@@ -13,6 +13,7 @@ import { UnicornlistComponent } from './unicornlist/unicornlist.component';
 import { unicornReducer } from '../ngrx/unicorn.reducer';
 import { BabyfactoryComponent } from './babyfactory/babyfactory.component';
 import { environment } from '../environments/environment';
+import { UnicornListItemComponent } from './unicornlist/unicorn-list-item/unicorn-list-item.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { environment } from '../environments/environment';
     UnicorneditorComponent,
     UnicornlistComponent,
     BabyfactoryComponent,
+    UnicornListItemComponent,
   ],
   imports: [
     BrowserModule,

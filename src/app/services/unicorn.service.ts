@@ -5,7 +5,7 @@ import { Gender } from '../model/Gender';
 import { Store } from '@ngrx/store';
 import { selectUnicornsList } from 'src/ngrx/unicorn.reducer';
 import { LocalStorageService } from './local-storage.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, mergeMap, take, tap } from 'rxjs/operators';
 import { random } from '../utils/math';
 
 const UNICORN_LIST = 'unicornList';
@@ -25,7 +25,7 @@ export class UnicornService {
   fetchUnicorns(): Observable<Unicorn[]> {
     console.log('fetching unicorns...');
     return this.localStorage.getItem(UNICORN_LIST).pipe(
-      map((d) => d),
+      map((d:any) => d.map((u:Unicorn) => Object.assign(new Unicorn(), u))),
       catchError(() => {
         this.initializeLocalStorage().subscribe();
         return of([]);

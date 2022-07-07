@@ -1,19 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { StoreModule } from '@ngrx/store';
+import { Actions } from '@ngrx/effects';
 import { AppComponent } from './app.component';
-import {StoreModule} from "@ngrx/store";
-import {Actions} from "@ngrx/effects";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[
+      imports: [
         StoreModule.forRoot({}),
-        RouterTestingModule
+        RouterTestingModule,
       ],
-      providers:[Actions],
+      providers: [Actions],
       declarations: [
-        AppComponent
+        AppComponent,
       ],
     }).compileComponents();
   });
@@ -24,7 +24,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'unicorsrules'`, () => {
+  it('should have as title \'unicorsrules\'', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('UnicornsRules');

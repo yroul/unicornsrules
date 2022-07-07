@@ -23,11 +23,11 @@ import { takeUntil, Subject } from 'rxjs';
   templateUrl: './unicorneditor.component.html',
   styleUrls: ['./unicorneditor.component.sass'],
 })
-export class UnicorneditorComponent implements OnInit, OnChanges, OnDestroy {
+export class UnicorneditorComponent implements OnInit, OnDestroy {
   private destroyed$ = new Subject<boolean>();
-  currentUnicorn?: Unicorn;
+  currentUnicorn?: Unicorn 
   availableGenders = Object.keys(Gender).filter((v) => isNaN(Number(v)));
-
+  formIsValid: boolean = false;
   constructor(
     private unicornService: UnicornService,
     private store: Store<{ unicorns: Unicorn[] }>,
@@ -40,11 +40,6 @@ export class UnicorneditorComponent implements OnInit, OnChanges, OnDestroy {
         this.router.navigate(['/']);
       });
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes');
-    console.log(changes);
-  }
-
   ngOnInit(): void {
     this.currentUnicorn = new Unicorn();
   }
@@ -60,5 +55,12 @@ export class UnicorneditorComponent implements OnInit, OnChanges, OnDestroy {
   ngOnDestroy() {
     this.destroyed$.next(true);
     this.destroyed$.complete();
+  }
+  checkForm(){
+    console.log(this.currentUnicorn?.name)
+    if(this.currentUnicorn){
+      this.formIsValid = this.currentUnicorn.name.length > 0;
+    }
+    
   }
 }

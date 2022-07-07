@@ -13,17 +13,17 @@ const UNICORN_LIST = 'unicornList';
   providedIn: 'root',
 })
 export class UnicornService {
-  unicorns$: Observable<Unicorn[]>;
-  unicorns2$: Observable<Unicorn[]>;
+ 
+ // unicorns$: Observable<Unicorn[]>;
+ // unicorns2$: Observable<Unicorn[]>;
   constructor(
     private store: Store<{ unicorns: Unicorn[] }>,
     private localStorage: LocalStorageService
   ) {
-    this.unicorns$ = store.select('unicorns');
-    this.unicorns2$ = store.select(selectUnicornsList);
+   // this.unicorns$ = store.select('unicorns');
+    //this.unicorns2$ = store.select(selectUnicornsList);
   }
   fetchUnicorns(): Observable<Unicorn[]> {
-    console.log('fetching unicorns...');
     return this.localStorage.getItem(UNICORN_LIST).pipe(
       map((d:any) => d.map((u:Unicorn) => Object.assign(new Unicorn(), u))),
       catchError(() => {
@@ -33,17 +33,24 @@ export class UnicornService {
     );
   }
   saveUnicorn(unicorn: Unicorn): Observable<any> {
-    console.log('save unicorn called', unicorn);
     this.localStorage
       .getItem(UNICORN_LIST)
       .pipe(
         map((data) => {
           let toSave;
           if (data) {
-            console.log('unicorn list already exist', data);
             toSave = data.slice(0);
           } else {
             toSave = new Array();
+          }
+          // check if unicorn with id already exist
+          const existingUnicorn = toSave.filter((u:Unicorn) => u.id === unicorn.id)[0];
+          if(existingUnicorn){
+            const indexExistingUnicorn =toSave.indexOf(existingUnicorn);
+            if (indexExistingUnicorn > -1) {
+              // remove existing unicorn from array
+              toSave.splice(indexExistingUnicorn, 1);              
+            }
           }
           toSave.push(unicorn);
           return this.localStorage.setItem(UNICORN_LIST, toSave);
@@ -54,7 +61,6 @@ export class UnicornService {
     return of(unicorn);
   }
   initializeLocalStorage(): Observable<any> {
-    console.log('Initialize database');
     return this.localStorage.setItem(UNICORN_LIST, []);
   }
 
@@ -113,9 +119,12 @@ export class UnicornService {
   }
 
   clearDatabase(): Observable<any> {
-    console.log('clear database');
     return this.localStorage
       .clear()
       .pipe(map(() => this.initializeLocalStorage()));
+  }
+
+  updateUnicorn(updatedUnicorn: Unicorn): Observable<Unicorn> {
+    return this.saveUnicorn(updatedUnicorn);
   }
 }

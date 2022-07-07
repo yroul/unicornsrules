@@ -12,6 +12,7 @@ describe('Unicorn', () => {
     expect(unicorn.name).toEqual('Jean');
     expect(unicorn.age).toEqual(26);
     expect(unicorn.color).toEqual('#FF0050');
+    expect(unicorn.id).toMatch(/^[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}$/);
     const total =
       unicorn.agility +
       unicorn.intelligence +
@@ -34,16 +35,19 @@ describe('Unicorn', () => {
     let unicorn = new Unicorn('Jean', undefined, Gender.Other, 26);
     expect(unicorn).toBeTruthy();
     expect(unicorn.color).toBeTruthy();
+    expect(unicorn.id).toMatch(/^[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}$/);
   });
   it('should be created (default constructor)', () => {
     let unicorn = new Unicorn();
     expect(unicorn).toBeTruthy();
     expect(unicorn.color).toBeTruthy();
+    expect(unicorn.id).toMatch(/^[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}$/);
   });
   it('should be get the correct skill value', () => {
     let unicorn = new Unicorn();
     unicorn.agility = 9;
     expect(unicorn.getSkillValue('agility')).toEqual(9);
+    expect(unicorn.id).toMatch(/^[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}$/);
   });
   it('should be throw an Error (unknown skillName)', () => {
     let unicorn = new Unicorn();

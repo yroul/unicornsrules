@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
   templateUrl: './babyfactory.component.html',
   styleUrls: ['./babyfactory.component.sass'],
 })
-export class BabyfactoryComponent implements OnInit, OnChanges {
+export class BabyfactoryComponent implements OnInit {
   firstUnicorn?: Unicorn;
   secondUnicorn?: Unicorn;
   allUnicorns: Unicorn[] = [];
@@ -37,7 +37,6 @@ export class BabyfactoryComponent implements OnInit, OnChanges {
         // takeUntil(this.destroyed$)
       )
       .subscribe(({ unicorns }) => {
-        console.log(unicorns);
         this.allUnicorns = unicorns.filter(
           (u: Unicorn) => u.gender !== Gender.Other
         );
@@ -65,9 +64,7 @@ export class BabyfactoryComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-  }
+
 
   makeBaby() {
     if (this.firstUnicorn && this.secondUnicorn) {

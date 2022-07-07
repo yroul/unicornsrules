@@ -2,14 +2,17 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, EmptyError, of, pipe, tap } from 'rxjs';
 import { map, mergeMap, catchError, exhaustMap } from 'rxjs/operators';
+import { Unicorn } from 'src/app/model/Unicorn';
 import { UnicornService } from 'src/app/services/unicorn.service';
 import {
   CLEAR_DATABASE_ACTION,
   clearDatabaseSuccess,
   CREATE_UNICORN_ACTION,
-  FETCH_UNICORN_ACTION
+  FETCH_UNICORN_ACTION,
+  UPDATE_UNICORN_ACTION,
+  updateUnicornSuccess
 } from './unicorn.actions';
-import { createUnicornSuccess,fetchUnicornSuccess } from './unicorn.actions';
+import { createUnicornSuccess,fetchUnicornSuccess,  } from './unicorn.actions';
 @Injectable()
 export class UnicornEffects {
 
@@ -48,6 +51,17 @@ export class UnicornEffects {
         )
       })
     ));
+    updateUnicorn$ = createEffect(() => 
+      () => this.actions$.pipe(
+        ofType(UPDATE_UNICORN_ACTION),
+        exhaustMap(({unicorn}) => {
+          return this.unicornService.updateUnicorn(unicorn).pipe(
+            map((ackUnicorn) => updateUnicornSuccess({unicorn: ackUnicorn})),
+            catchError((err)=> {throw new Error(err);})
+          )
+        })
+      )
+    );
 
   constructor(
     private actions$: Actions,

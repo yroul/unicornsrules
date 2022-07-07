@@ -14,6 +14,10 @@ const routes: Routes = [
     component: UnicorneditorComponent,
   },
   {
+    path: 'edit/:id',
+    component: UnicorneditorComponent,
+  },
+  {
     path: 'babyfactory',
     component: BabyfactoryComponent,
   },

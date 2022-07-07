@@ -1,7 +1,7 @@
 
 <div *ngIf="unicorn" class="grid-item">
     <div>
-        <h1>{{unicorn.name}}</h1>
+        <a [routerLink]="['/edit',unicorn.id]"><h1>{{unicorn.name}}</h1></a>
         <p>Hello ! My name is {{ unicorn.name}} and i am {{ unicorn.age | sanitizeAgePipe}}. 
             <br>I am {{ unicorn?.gender?.toString() | genderify}} Unicorn.
             <br>My color is {{ unicorn.color}}: it means nothing to you human, so just check my picture.</p>

@@ -125,7 +125,6 @@ describe('UnicornService', () => {
     const males = babies .map((u: Unicorn)=> u.gender) .filter((g) => g === Gender.Male);
     const others = babies .map((u: Unicorn)=> u.gender).filter((g) => g === Gender.Other);
 
-    console.log(females,males,others)
     expect(females.length).toBeGreaterThan(0);
     expect(males.length).toBeGreaterThan(0);
     expect(others.length).toBeGreaterThan(0);

@@ -2,10 +2,12 @@
 <div *ngIf="unicorn" class="grid-item">
     <div>
         <h1>{{unicorn.name}}</h1>
-        <p>Hello ! My name is {{ unicorn.name}} and i am {{ unicorn.age}} year(s) old. My color is {{ unicorn.color}}: it means nothing to you human, so just check my picture.</p>
+        <p>Hello ! My name is {{ unicorn.name}} and i am {{ unicorn.age | sanitizeAgePipe}}. 
+            <br>I am {{ unicorn?.gender?.toString() | genderify}} Unicorn.
+            <br>My color is {{ unicorn.color}}: it means nothing to you human, so just check my picture.</p>
         <div class="skill-list">
             <div *ngFor="let skillName of skillsList" >
-                <div>{{ skillName }} : {{getSKillValue(skillName)}}</div>
+                <div>{{ skillName | capitalize }} : {{getSKillValue(skillName)}}</div>
                 <div class="meter">
                     <span style="width: {{getSKillValue(skillName) * 10 }}%"></span>
                 </div>

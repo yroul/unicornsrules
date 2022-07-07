@@ -105,4 +105,31 @@ describe('UnicornService', () => {
     );
     expect(baby.strength).toEqual(strengthAverage);
   });
+  it('should make several babies, with many genders', () => {
+    const unicorn1 = new Unicorn();
+    unicorn1.name = 'Jean';
+    unicorn1.gender = Gender.Male;
+    unicorn1.color = '#012345';
+    unicorn1.age = 20;
+    const unicorn2 = new Unicorn();
+    unicorn2.name = 'Raymond';
+    unicorn2.gender = Gender.Female;
+    unicorn2.color = '#6789FF';
+    unicorn2.age = 20;
+
+    const babies =[];
+    for(let i =0; i< 10 ; i++){
+      babies.push(service.makeBaby(unicorn1, unicorn2));
+    }
+    const females = babies.map((u: Unicorn)=> u.gender) .filter((g) => g === Gender.Female);
+    const males = babies .map((u: Unicorn)=> u.gender) .filter((g) => g === Gender.Male);
+    const others = babies .map((u: Unicorn)=> u.gender).filter((g) => g === Gender.Other);
+
+    console.log(females,males,others)
+    expect(females.length).toBeGreaterThan(0);
+    expect(males.length).toBeGreaterThan(0);
+    expect(others.length).toBeGreaterThan(0);
+
+
+  });
 });

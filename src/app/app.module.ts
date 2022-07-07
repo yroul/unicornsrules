@@ -14,6 +14,9 @@ import { unicornReducer } from '../ngrx/unicorn.reducer';
 import { BabyfactoryComponent } from './babyfactory/babyfactory.component';
 import { environment } from '../environments/environment';
 import { UnicornListItemComponent } from './unicornlist/unicorn-list-item/unicorn-list-item.component';
+import { CapitalizePipe } from './pipe/capitalize.pipe';
+import { GenderifyPipe } from './pipe/genderify.pipe';
+import { SanitizeAgePipe } from './pipe/sanitize-age.pipe';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { UnicornListItemComponent } from './unicornlist/unicorn-list-item/unicor
     UnicornlistComponent,
     BabyfactoryComponent,
     UnicornListItemComponent,
+    CapitalizePipe,
+    GenderifyPipe,
+    SanitizeAgePipe
   ],
   imports: [
     BrowserModule,

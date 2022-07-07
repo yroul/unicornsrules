@@ -37,10 +37,6 @@ export class UnicornlistComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /* this.unicornService.fetchUnicorns().subscribe((data:Unicorn[]) => {
-        console.log('current saved unicors:')
-       this.list = data;
-      })*/
     this.store.dispatch(fetchUnicorn());
   }
 }

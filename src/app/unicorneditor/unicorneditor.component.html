@@ -1,7 +1,7 @@
 <div *ngIf="currentUnicorn !== undefined">
   <form>
     <div>
-      <label for="name">name: </label>
+      <label for="name">Name: </label>
       <input
         name="name"
         id="name"
@@ -10,7 +10,7 @@
       />
     </div>
     <div>
-      <label for="color">color: </label>
+      <label for="color">Color: </label>
       <input
         id="color"
         cpOutputFormat="hex"
@@ -20,6 +20,7 @@
       />{{ currentUnicorn.color }}
     </div>
     <div>
+      <label for="gender">Gender: </label>
       <select
         (change)="onGenderChange($event)"
         [(ngModel)]="currentUnicorn.gender"
@@ -31,7 +32,7 @@
       </select>
     </div>
     <div>
-      <label for="age">age: </label>
+      <label for="age">Age: </label>
       <input
         name="age"
         type="number"

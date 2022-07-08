@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SanitizeAgePipe implements PipeTransform {
 
   transform(age: number | undefined, ...args: unknown[]): string {
-    if(!age) return '';
+    if(age === undefined) return '';
     let plural = false;
     if(age > 1){
       plural = true;

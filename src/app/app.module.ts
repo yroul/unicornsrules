@@ -12,11 +12,12 @@ import { UnicorneditorComponent } from './unicorneditor/unicorneditor.component'
 import { UnicornlistComponent } from './unicornlist/unicornlist.component';
 import { unicornReducer } from '../ngrx/unicorn.reducer';
 import { BabyfactoryComponent } from './babyfactory/babyfactory.component';
-import { environment } from '../environments/environment';
+import  environment  from '../environments/environment';
 import { UnicornListItemComponent } from './unicornlist/unicorn-list-item/unicorn-list-item.component';
 import { CapitalizePipe } from './pipe/capitalize.pipe';
 import { GenderifyPipe } from './pipe/genderify.pipe';
 import { SanitizeAgePipe } from './pipe/sanitize-age.pipe';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { SanitizeAgePipe } from './pipe/sanitize-age.pipe';
     SanitizeAgePipe
   ],
   imports: [
+    RouterModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

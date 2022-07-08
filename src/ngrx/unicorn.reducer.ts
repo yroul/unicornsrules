@@ -5,7 +5,11 @@ import {
   createFeatureSelector,
 } from '@ngrx/store';
 import { Unicorn } from 'src/app/model/Unicorn';
-import { createUnicornSuccess, fetchUnicornSuccess, updateUnicornSuccess } from './unicorn.actions';
+import {
+  createUnicornSuccess,
+  fetchUnicornSuccess,
+  updateUnicornSuccess,
+} from './unicorn.actions';
 
 const initialUnicornsList: Unicorn[] = [];
 
@@ -20,12 +24,10 @@ export const selectUnicornsList = createSelector(
   feature,
   (state): Unicorn[] => state && state.unicornsList
 );
-export const selectUnicornById = (id: string) => createSelector(
-  feature,
-  ({unicornsList}) =>{
-    return unicornsList.filter((u:Unicorn) => u.id === id)[0];
-  }
-);
+export const selectUnicornById = (id: string) =>
+  createSelector(feature, ({ unicornsList }) => {
+    return unicornsList.filter((u: Unicorn) => u.id === id)[0];
+  });
 
 export const unicornReducer = createReducer(
   initialState,
@@ -45,5 +47,5 @@ export const unicornReducer = createReducer(
     return {
       unicornsList: [...newArray],
     };
-  }),
+  })
 );
